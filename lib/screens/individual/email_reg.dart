@@ -15,7 +15,6 @@ class EmailRegScreen extends StatefulWidget {
 class _EmailRegScreenState extends State<EmailRegScreen> {
   String email;
   String password;
-  final _auth = FirebaseAuth.instance;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 

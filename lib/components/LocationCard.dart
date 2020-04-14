@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
 class LocationCard extends StatelessWidget {
-  VolLoc loc;
+  final VolLoc loc;
 
   //VolLocBrain brain = VolLocBrain();
   LocationCard(this.loc);

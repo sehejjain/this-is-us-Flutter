@@ -16,7 +16,6 @@ class OrgEmailRegScreen extends StatefulWidget {
 class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
   String email;
   String password;
-  final _auth = FirebaseAuth.instance;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
@@ -128,6 +127,7 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                                   .signInWithEmailAndPassword(
                                       email: email, password: password))
                               .user;
+                          print(loggedInUser.email);
                           if (user != null) {
                             //Go On
                             UserType usertype = UserType(1);

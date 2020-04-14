@@ -53,7 +53,6 @@ class _CreateVolLocState extends State<CreateVolLoc> {
 
   @override
   Widget build(BuildContext context) {
-    LocationResult loc;
     return Scaffold(
       appBar: AppBar(
         title: Text('This is Us'),
@@ -206,8 +205,8 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                   VolLoc vol = VolLoc(
                       creator: loggedInUser.uid,
                       name: name,
-                      contact_email: email,
-                      contact_phone: phone,
+                      contactEmail: email,
+                      contactPhone: phone,
                       location: GeoPoint(
                           location.latLng.latitude, location.latLng.longitude),
                       desc: 'none yet',
@@ -217,7 +216,7 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                   CollectionReference dbLocs =
                       Firestore.instance.collection('VolLocs');
                   Firestore.instance.runTransaction((Transaction tx) async {
-                    var _result = await dbLocs.add(vol.toJson());
+                    await dbLocs.add(vol.toJson());
 
                     final snackBar =
                         SnackBar(content: Text('Yay! A SnackBar!'));

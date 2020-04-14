@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../constants.dart';
 
@@ -13,19 +12,17 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  var _image;
-
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = image;
-    });
-  }
+//  var _image;
+//
+//  Future getImage() async {
+//    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+//    setState(() {
+//      _image = image;
+//    });
+//  }
 
   @override
   Widget build(BuildContext context) {
-    String newTaskTitle;
-
     return Container(
       color: Color(0xff757575),
       child: Container(

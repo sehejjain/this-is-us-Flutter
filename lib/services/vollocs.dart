@@ -18,8 +18,8 @@ class VolLocBrain {
       var locationn = VolLoc(
         creator: loc.data["creator"],
         name: loc.data["name"],
-        contact_phone: loc.data["contact_phone"],
-        contact_email: loc.data["contact_email"],
+        contactPhone: loc.data["contact_phone"],
+        contactEmail: loc.data["contact_email"],
         dateStart: DateTime.parse((loc.data["dateStart"]).toDate().toString()),
         dateEnd: DateTime.parse((loc.data["dateEnd"]).toDate().toString()),
         location: loc.data["location"],
@@ -43,22 +43,22 @@ class VolLocBrain {
     return locData;
   }
 
-  List<VolLoc> getList(String cityName) {
-    for (var loc in locationsData) {
-//      VolLoc(
-//          creator: loc.data["creator"],
-//          name: loc.data["name"],
-//          contact_phone: loc.data["contact_phone"],
-//          contact_email: loc.data["contact_email"],
-//          dateStart:
-//              DateTime.parse((loc.data["dateStart"]).toDate().toString()),
-//          dateEnd: DateTime.parse((loc.data["dateEnd"]).toDate().toString()),
-//          location: loc.data["location"],
-//          desc: loc.data["desc"], dateCreated: DateTime.parse((loc
-//          .data["dateCreated"]).toDate().toString()), q);
-    }
-    return null;
-  }
+//  List<VolLoc> getList(String cityName) {
+////    for (var loc in locationsData) {
+////      VolLoc(
+////          creator: loc.data["creator"],
+////          name: loc.data["name"],
+////          contact_phone: loc.data["contact_phone"],
+////          contact_email: loc.data["contact_email"],
+////          dateStart:
+////              DateTime.parse((loc.data["dateStart"]).toDate().toString()),
+////          dateEnd: DateTime.parse((loc.data["dateEnd"]).toDate().toString()),
+////          location: loc.data["location"],
+////          desc: loc.data["desc"], dateCreated: DateTime.parse((loc
+////          .data["dateCreated"]).toDate().toString()), q);
+//    }
+//    return null;
+//  }
 
   Future<String> getCityName(GeoPoint a) async {
     final coordinates = new Coordinates(a.latitude, a.longitude);
