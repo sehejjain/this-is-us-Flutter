@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "524359812404",
+    "firebase_url": "https://this-is-us-fd724.firebaseio.com",
+    "project_id": "this-is-us-fd724",
+    "storage_bucket": "this-is-us-fd724.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524359812404:android:921f0f5c4d6b92908a1161",
+        "android_client_info": {
+          "package_name": "com.sehej.thisisus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524359812404-5tf60ek7ai3umlfacbuc2mvdguutrvjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgeGusnAm-haIHWqlsTXPpqKGwOqMCUqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524359812404-5tf60ek7ai3umlfacbuc2mvdguutrvjp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
