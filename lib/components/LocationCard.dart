@@ -47,13 +47,6 @@ class LocationCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Text(
-                          '${loc.location}',
-                          style: TextStyle(color: Colors.pink),
-                        ),
-                      ),
                     ],
                   ),
                 ),

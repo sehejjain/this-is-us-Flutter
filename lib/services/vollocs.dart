@@ -29,7 +29,7 @@ class VolLocBrain {
       );
       _listLoc.add(locationn);
     }
-    print(_listLoc);
+    //print(_listLoc);
     return list;
   }
 

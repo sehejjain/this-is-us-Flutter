@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:thisisus/components/LocationCard.dart';
 import 'package:thisisus/models/LocationModel.dart';
-import 'package:thisisus/services/vollocs.dart';
 
 class IndLandingScreen extends StatefulWidget {
   @override
@@ -10,46 +9,45 @@ class IndLandingScreen extends StatefulWidget {
 }
 
 class _IndLandingScreenState extends State<IndLandingScreen> {
-  VolLocBrain brain = VolLocBrain();
-  GeoPoint currLoc;
-
-//  void getCurrentLocation() async {
-//    try {
-//      Position position = await Geolocator()
-//          .getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
-//    } catch (e) {
-//      print(e);
-//      Position position = await Geolocator()
-//          .getLastKnownPosition(desiredAccuracy: LocationAccuracy.lowest);
-//      currLoc = GeoPoint(position.latitude, position.longitude);
-//    }
-//  }
-
-  List<VolLoc> list;
-
-  @override
-  void initState() {
-    super.initState();
-    //brain.getLocations();
-    list = brain.getListLoc();
-  }
-
-  List<Widget> getWidgets() {
-    List<Widget> cards = [];
-    for (var loc in list) {
-      cards.add(LocationCard(loc));
-    }
-    return cards;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: ListView(
-        children: getWidgets(),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection("VolLocs").snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot ds = snapshot.data.documents[index];
+                var location = VolLoc(
+                  creator: ds.data["creator"],
+                  name: ds.data["name"],
+                  contactPhone: ds.data["contact_phone"],
+                  contactEmail: ds.data["contact_email"],
+                  dateStart: DateTime.parse(
+                      (ds.data["dateStart"]).toDate().toString()),
+                  dateEnd:
+                  DateTime.parse((ds.data["dateEnd"]).toDate().toString()),
+                  location: ds.data["location"],
+                  desc: ds.data["desc"],
+                  dateCreated: DateTime.parse(
+                      (ds.data["dateCreated"]).toDate().toString()),
+                );
+                return LocationCard(location);
+              },
+            );
+          }
+        },
       ),
     );
   }
