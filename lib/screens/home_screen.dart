@@ -72,34 +72,36 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Container(
                       height: 450,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            WidgetSpan(
-                              child: Hero(
-                                tag: 'mainLogo',
-                                child: Material(
-                                  child: SizedBox(
-                                    height: 275,
-                                    width: 500,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 16,
-                                        left: 16,
-                                        right: 16,
-                                      ),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
+                      child: Center(
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              WidgetSpan(
+                                child: Hero(
+                                  tag: 'mainLogo',
+                                  child: Material(
+                                    child: SizedBox(
+                                      height: 275,
+                                      width: 500,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 16,
+                                          left: 16,
+                                          right: 16,
                                         ),
-                                        color: Colors.black,
-                                        child: Center(
-                                          child: Text(
-                                            'This is Us',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 50,
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(30),
+                                          ),
+                                          color: Colors.black,
+                                          child: Center(
+                                            child: Text(
+                                              'This is Us',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 50,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -108,25 +110,25 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                            ),
-                            WidgetSpan(
-                              child: SizedBox(
-                                height: 80,
-                                width: 500,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Center(
-                                    child: Text(
-                                      'Matching You to Your Cause',
-                                      style: TextStyle(
-                                        fontSize: 20,
+                              WidgetSpan(
+                                child: SizedBox(
+                                  height: 80,
+                                  width: 500,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Center(
+                                      child: Text(
+                                        'Matching You to Your Cause',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
