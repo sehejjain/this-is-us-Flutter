@@ -107,18 +107,11 @@ class _EmailRegScreenState extends State<EmailRegScreen> {
                               .user;
 
                           if (user != null) {
-//                            FirebaseUser loggedInUser = (await FirebaseAuth
-//                                    .instance
-//                                    .signInWithEmailAndPassword(
-//                                        email: email, password: password))
-//                                .user;
-                            //Go On
                             UserType usertype = UserType(0);
                             Map<String, dynamic> userTypeData =
                                 usertype.toJson();
                             final CollectionReference userTypeRef =
                                 Firestore.instance.collection('UserTypes');
-                            //TODO
                             await userTypeRef
                                 .document(user.uid)
                                 .setData(userTypeData);

@@ -25,6 +25,9 @@ dependencies:
   google_sign_in: ^4.4.1
   geocoder: ^0.2.1
   flutter_spinkit: ^4.1.2+1
+  expansion_card: ^0.1.0
+  shared_preferences: ^0.5.7
+
 
 
 

@@ -200,7 +200,6 @@ class _CreateVolLocState extends State<CreateVolLoc> {
             child: FloatingActionButton(
               shape: CircleBorder(),
               onPressed: () {
-                // Add your onPressed code here!
                 setState(() {
                   VolLoc vol = VolLoc(
                       creator: loggedInUser.uid,

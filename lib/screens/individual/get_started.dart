@@ -1,17 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class OrgSignUpScreen extends StatefulWidget {
+class GetStartedPage extends StatefulWidget {
   @override
-  _OrgSignUpScreenState createState() => _OrgSignUpScreenState();
+  _GetStartedPageState createState() => _GetStartedPageState();
 }
 
-class _OrgSignUpScreenState extends State<OrgSignUpScreen> {
+//TODO: Implement Facebook and Google Sign In
+class _GetStartedPageState extends State<GetStartedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Organisation Sign Up'),
+        title: Text('This is Us'),
       ),
       body: Material(
         child: Column(
@@ -52,7 +54,7 @@ class _OrgSignUpScreenState extends State<OrgSignUpScreen> {
               widthFactor: 0.9,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, 'orgEmailReg');
+                  Navigator.pushNamed(context, 'emailSignUp');
                 },
                 child: Card(
                   margin: EdgeInsets.all(10.0),
@@ -110,6 +112,34 @@ class _OrgSignUpScreenState extends State<OrgSignUpScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Register or Login as an Organization?\n',
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Click here',
+                      style: TextStyle(
+                        color: Colors.pink,
+                        fontSize: 15,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap =
+                            () => Navigator.pushNamed(context, 'orgLogin'),
+                    )
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
           ],
         ),
       ),

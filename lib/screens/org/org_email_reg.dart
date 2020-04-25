@@ -6,7 +6,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/models/user_type_model.dart';
 
 import '../../constants.dart';
-import 'BottomSheet.dart';
 
 class OrgEmailRegScreen extends StatefulWidget {
   @override
@@ -93,22 +92,6 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                     SizedBox(
                       height: 24.0,
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (context) => SingleChildScrollView(
-                                    child: Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom),
-                                  child: AddTaskScreen(),
-                                )));
-                      },
-                      child: Text('sheet'),
-                    ),
                     RoundedLoadingButton(
                       color: Colors.black87,
                       child: Text(
@@ -140,7 +123,6 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                                 .setData(userTypeData);
                           }
                           _btnController.success();
-                          _settingModalBottomSheet(context);
                         } catch (e) {
                           print(e);
                           _btnController.reset();
@@ -177,27 +159,4 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
       ),
     );
   }
-}
-
-void _settingModalBottomSheet(context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext bc) {
-      return Container(
-        child: new Wrap(
-          children: <Widget>[
-            new ListTile(
-                leading: new Icon(Icons.music_note),
-                title: new Text('Music'),
-                onTap: () => {}),
-            new ListTile(
-              leading: new Icon(Icons.videocam),
-              title: new Text('Video'),
-              onTap: () => {},
-            ),
-          ],
-        ),
-      );
-    },
-  );
 }

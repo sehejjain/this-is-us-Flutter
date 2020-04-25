@@ -24,9 +24,6 @@ class _HomePageState extends State<HomePage> {
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
-//        Timer.run(() {
-//          Navigator.pushNamed(context, 'getStarted');
-//        });
       }
     } catch (e) {
       print(e);
@@ -53,7 +50,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     getCurrentUser();
     userType = getUserType();
   }
@@ -133,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, 'signUp');
+                          Navigator.pushNamed(context, 'getStarted');
                         },
                         child: Text(
                           'Get Started',

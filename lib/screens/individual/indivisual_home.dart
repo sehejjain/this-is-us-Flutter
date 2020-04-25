@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thisisus/components/LocationCard.dart';
 import 'package:thisisus/models/LocationModel.dart';
@@ -9,6 +10,27 @@ class IndLandingScreen extends StatefulWidget {
 }
 
 class _IndLandingScreenState extends State<IndLandingScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser();
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +62,7 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
                   DateTime.parse((ds.data["dateEnd"]).toDate().toString()),
                   location: ds.data["location"],
                   desc: ds.data["desc"],
+                  id: ds.documentID,
                   dateCreated: DateTime.parse(
                       (ds.data["dateCreated"]).toDate().toString()),
                 );
