@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thisisus/services/size_config.dart';
 
 const kTextFieldDecoration = InputDecoration(
   hintText: 'Enter a value',
@@ -15,3 +16,20 @@ const kTextFieldDecoration = InputDecoration(
 //    borderSide: BorderSide(color: Colors.blueGrey, width: 2.0),
 //  ),
 );
+
+
+////Context Size
+//class SizeConstantClass
+//{
+//  static double getBlockHorizontal(BuildContext context)
+//  {
+//    SizeConfig().init(context);
+//    return SizeConfig.blockSizeHorizontal;
+//  }
+//  static double getBlockVertical(BuildContext context)
+//  {
+//    SizeConfig().init(context);
+//    return SizeConfig.blockSizeVertical;
+//  }
+//}
+
