@@ -1,22 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thisisus/screens/individual/emailLogin.dart';
 import 'package:thisisus/screens/individual/email_reg.dart';
 import 'package:thisisus/screens/individual/get_started.dart';
 import 'package:thisisus/screens/individual/indivisual_home.dart';
+import 'package:thisisus/screens/landing_page.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
 import 'package:thisisus/screens/org/org_get_started.dart';
 
-import 'screens/home_screen.dart';
-
 void main() async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser user = await _auth.currentUser();
-  Widget home = (user == null) ? HomePage() : IndLandingScreen();
-  return runApp(MyApp(
-    home: home,
-  ));
+  return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: home,
+      home: LandingPage(),
       routes: {
         'getStarted': (context) => GetStartedPage(),
         'emailSignUp': (context) => EmailRegScreen(),
