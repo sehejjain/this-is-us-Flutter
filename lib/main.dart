@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:thisisus/screens/get_started.dart';
 import 'package:thisisus/screens/individual/emailLogin.dart';
 import 'package:thisisus/screens/individual/email_reg.dart';
+import 'package:thisisus/screens/individual/get_started.dart';
 import 'package:thisisus/screens/individual/indivisual_home.dart';
-import 'package:thisisus/screens/individual/sign_up.dart';
+import 'package:thisisus/screens/landing_page.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
-import 'package:thisisus/screens/org/orgLogin.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
+import 'package:thisisus/screens/org/org_get_started.dart';
 
-import 'screens/home_screen.dart';
-
-void main() => runApp(MyApp());
+void main() async {
+  return runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  //TODO: Create a Splash Screen
+  //TODO: Create Org Login Landing Page or Org Home
+
+  final Widget home;
+
+  MyApp({this.home});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,10 +28,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: HomePage(title: 'This Is Us'),
+      home: LandingPage(),
       routes: {
         'getStarted': (context) => GetStartedPage(),
-        'signUp': (context) => SignUpScreen(),
         'emailSignUp': (context) => EmailRegScreen(),
         'login': (context) => EmailLoginScreen(),
         'createVolLoc': (context) => CreateVolLoc(),

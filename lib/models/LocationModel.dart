@@ -4,7 +4,7 @@ class VolLoc {
   String creator;
   String name;
   GeoPoint location;
-
+  String id;
   String contactEmail;
   String contactPhone;
   DateTime dateStart;
@@ -14,6 +14,7 @@ class VolLoc {
 
   VolLoc(
       {this.creator,
+        this.id,
       this.name,
         this.contactEmail,
       this.location,

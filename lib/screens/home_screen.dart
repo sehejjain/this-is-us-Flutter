@@ -23,20 +23,16 @@ class _HomePageState extends State<HomePage> {
   var userType;
 
 
-  Future<FirebaseUser> getCurrentUser() async {
+  void getCurrentUser() async {
     try {
       final user = await _auth.currentUser();
       if (user != null) {
-        print(user.email);
-        return user;
-//        Timer.run(() {
-//          Navigator.pushNamed(context, 'getStarted');
-//        });
+        loggedInUser = user;
+        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
     }
-    return null;
   }
 
   Future<String> getUID() async {
@@ -61,12 +57,10 @@ class _HomePageState extends State<HomePage> {
     userType = await getUserType();
   }
 
-  @override
   void initState() {
     super.initState();
-
-
-    getUserInfo();
+    getCurrentUser();
+    userType = getUserType();
   }
 
   @override
@@ -145,6 +139,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                   ),
+
                 ),
                 SizedBox(
                   height: 5*vertVal,
