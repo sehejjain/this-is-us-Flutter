@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thisisus/services/size_config.dart';
+
+import '../constants.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -17,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
   var userType;
+
 
   void getCurrentUser() async {
     try {
@@ -47,7 +52,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
+  void getUserInfo() async {
+    loggedInUser = await getCurrentUser();
+    userType = await getUserType();
+  }
+
   void initState() {
     super.initState();
     getCurrentUser();
@@ -56,59 +65,41 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var horizVal = displaySafeWidthBlocks(context);
+    var vertVal = displaySafeHeightBlocks(context);
+
     return Scaffold(
       body: SafeArea(
         child: Container(
-          //color: Colors.white,
-          child: Stack(
+          width: 100*vertVal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Positioned.fill(
-                top: 125,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 450,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            WidgetSpan(
-                              child: Hero(
-                                tag: 'mainLogo',
-                                child: Material(
-                                  child: SizedBox(
-                                    height: 275,
-                                    width: 500,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 16,
-                                        left: 16,
-                                        right: 16,
-                                      ),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        ),
-                                        color: Colors.black,
-                                        child: Center(
-                                          child: Text(
-                                            'This is Us',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 50,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            WidgetSpan(
-                              child: SizedBox(
-                                height: 80,
-                                width: 500,
+              SizedBox(
+                height: 20*vertVal,
+              ),
+              Container(
+                width: 80*horizVal,
+                height: 20*vertVal,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  color: Color(0xFF000000),
+                  child: Center(
+                    child: Text(
+                        "This is Us",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                                height: 15*vertVal,
+                                width: 90*vertVal,
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Center(
@@ -121,41 +112,64 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, 'getStarted');
-                        },
-                        child: Text(
-                          'Get Started',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ),
-                    FlatButton(
-                      child: Text('VolLoc'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'createVolLoc');
-                      },
-                    ),
-                    FlatButton(
-                      child: Text('Home'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'userHome');
-                      },
-                    ),
-                  ],
+          SizedBox(
+            height: 10*vertVal,
+          ),
+
+          Container(
+            height: 30*vertVal,
+            child: Column(
+
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, 'signUp');
+                                  },
+                                  child: Text(
+                                    '-->Get Started<--',
+                                    style: TextStyle(color: Colors.blueGrey,
+                                        fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                  ),
+
                 ),
-              ),
+                SizedBox(
+                  height: 5*vertVal,
+                ),
+                FlatButton(
+                  child: Text('\\VolLoc'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'createVolLoc');
+                  },
+                ),
+                FlatButton(
+                  child: Text('\\Home'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'userHome');
+                  },
+                ),
+              ],
+            ),
+          ),
+
+
             ],
           ),
         ),
+
       ),
     );
+
+    
   }
+
 }
+
