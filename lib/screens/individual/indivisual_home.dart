@@ -33,9 +33,22 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: Implement Drawer
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Home'),
+            FlatButton(
+              //Temp Button. Remove when Drawer has been implemented.
+              child: Text('Sign Out'),
+              onPressed: () {
+                _auth.signOut();
+              },
+            ),
+          ],
+        ),
       ),
       body: StreamBuilder(
         stream: Firestore.instance.collection("VolLocs").snapshots(),
