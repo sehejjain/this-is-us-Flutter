@@ -27,6 +27,7 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   expansion_card: ^0.1.0
   shared_preferences: ^0.5.7
+  provider: ^4.0.5
 
 
 

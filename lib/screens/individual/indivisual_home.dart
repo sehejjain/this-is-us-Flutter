@@ -1,40 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thisisus/components/LocationCard.dart';
+import 'package:thisisus/components/drawer.dart';
 import 'package:thisisus/models/LocationModel.dart';
+import 'package:thisisus/services/user_repository.dart';
 
 class IndLandingScreen extends StatefulWidget {
+  final FirebaseUser user;
+
+  const IndLandingScreen({Key key, this.user}) : super(key: key);
+
   @override
   _IndLandingScreenState createState() => _IndLandingScreenState();
 }
 
 class _IndLandingScreenState extends State<IndLandingScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     //TODO: Implement Drawer
     return Scaffold(
+      drawer: AppDrawer(
+        loggedInUser: widget.user,
+      ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +33,7 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
               //Temp Button. Remove when Drawer has been implemented.
               child: Text('Sign Out'),
               onPressed: () {
-                _auth.signOut();
+                Provider.of<UserRepository>(context, listen: false).signOut();
               },
             ),
           ],
@@ -79,7 +68,10 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
                   dateCreated: DateTime.parse(
                       (ds.data["dateCreated"]).toDate().toString()),
                 );
-                return LocationCard(location);
+                return LocationCard(
+                  loc: location,
+                  user: widget.user,
+                );
               },
             );
           }

@@ -1,7 +1,3 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thisisus/services/size_config.dart';
@@ -16,47 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
-  var userType;
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<String> getUID() async {
-    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    final String uid = user.uid.toString();
-    return uid;
-  }
-
-  Future<int> getUserType() async {
-    var document = Firestore.instance
-        .collection("UserTypes")
-        .document(await getUID())
-        .get();
-    return await document.then((doc) {
-      print(doc.data['type']);
-      return doc.data['type'];
-    });
-  }
-
-  void initState() {
-    super.initState();
-    getCurrentUser();
-    userType = getUserType();
-  }
-
   @override
   Widget build(BuildContext context) {
+    print('object');
     var horizVal = displaySafeWidthBlocks(context);
     var vertVal = displaySafeHeightBlocks(context);
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:thisisus/models/LocationModel.dart';
@@ -5,13 +6,14 @@ import 'package:thisisus/models/LocationModel.dart';
 import 'BottomSheet.dart';
 
 class LocationCard extends StatelessWidget {
+  final FirebaseUser user;
   final VolLoc loc;
 
-  //VolLocBrain brain = VolLocBrain();
-  LocationCard(this.loc);
+  LocationCard({this.loc, this.user});
 
   @override
   Widget build(BuildContext context) {
+    print(user.email);
     return FractionallySizedBox(
       widthFactor: 1,
       child: GestureDetector(
@@ -29,6 +31,7 @@ class LocationCard extends StatelessWidget {
                             .bottom),
                     child: VolLocBottomSheet(
                       loc: loc,
+                      loggedInUser: user,
                     ),
                   ),
                 ),

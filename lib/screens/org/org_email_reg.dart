@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/models/user_type_model.dart';
+import 'package:thisisus/services/user_repository.dart';
 
 import '../../constants.dart';
 
@@ -18,14 +20,9 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
-  Future<String> getUID() async {
-    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    final String uid = user.uid.toString();
-    return uid;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final userRepo = Provider.of<UserRepository>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Organisatin Sign Up'),
@@ -101,28 +98,23 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                       controller: _btnController,
                       onPressed: () async {
                         try {
-                          FirebaseUser user = (await FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: email, password: password))
+                          FirebaseUser user = (await userRepo.createUser(
+                              email: email, password: password))
                               .user;
-                          FirebaseUser loggedInUser = (await FirebaseAuth
-                                  .instance
-                                  .signInWithEmailAndPassword(
-                                      email: email, password: password))
-                              .user;
-                          print(loggedInUser.email);
                           if (user != null) {
                             //Go On
                             UserType usertype = UserType(1);
                             Map<String, dynamic> userTypeData =
-                                usertype.toJson();
+                            usertype.toJson();
                             final CollectionReference userTypeRef =
-                                Firestore.instance.collection('UserTypes');
+                            Firestore.instance.collection('UserTypes');
                             await userTypeRef
                                 .document(user.uid)
                                 .setData(userTypeData);
                           }
                           _btnController.success();
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
                         } catch (e) {
                           print(e);
                           _btnController.reset();

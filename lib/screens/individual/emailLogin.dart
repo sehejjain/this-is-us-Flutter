@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/constants.dart';
+import 'package:thisisus/services/user_repository.dart';
 
 class EmailLoginScreen extends StatefulWidget {
   @override
@@ -11,12 +12,12 @@ class EmailLoginScreen extends StatefulWidget {
 class _EmailLoginScreenState extends State<EmailLoginScreen> {
   String email;
   String password;
-  final _auth = FirebaseAuth.instance;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
   @override
   Widget build(BuildContext context) {
+    final userRepo = Provider.of<UserRepository>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign In'),
@@ -93,9 +94,8 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                       controller: _btnController,
                       onPressed: () async {
                         try {
-                          final newUser =
-                              await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password);
+                          final newUser = await userRepo.signIn(
+                              email: email, password: password);
                           if (newUser != null) {
                             //Go On
                             //TODO Add functionality
