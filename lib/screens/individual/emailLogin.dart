@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/constants.dart';
@@ -102,6 +101,12 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                             //TODO Add functionality
                           }
                           _btnController.success();
+                          //Delay to let button animation complete first.
+                          // TODO: Find better code.
+                          Future.delayed(const Duration(milliseconds: 0), () {
+                            Navigator.of(context)
+                                .popUntil((route) => route.isFirst);
+                          });
                         } catch (e) {
                           print(e);
                           _btnController.reset();
@@ -111,24 +116,6 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    Center(
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Already a Member? ',
-                            ),
-                            TextSpan(
-                              text: 'Click here to Login',
-                              style: TextStyle(color: Colors.pink),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap =
-                                    () => Navigator.pushNamed(context, 'login'),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
