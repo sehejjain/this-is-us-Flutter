@@ -26,7 +26,6 @@ class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
     return Container(
       color: Color(0xff757575),
       child: Container(
-        height: 700,
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -70,8 +69,15 @@ class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0),
             ),
+            SizedBox(
+              height: 20,
+            ),
             RoundedLoadingButton(
-              child: Text('Apply'),
+              child: Text(
+                'Apply',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.black,
               controller: _btnController,
               onPressed: () async {
                 try {
@@ -83,8 +89,7 @@ class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
                   await savedRef
                       .document(widget.loggedInUser.uid)
                       .collection('SavedUserLocs')
-                      .document(widget.loc.id)
-                      .setData({"date": DateTime.now()});
+                      .add({"date": DateTime.now(), "locID": widget.loc.id});
                   _btnController.success();
                 } catch (e) {
                   _btnController.reset();

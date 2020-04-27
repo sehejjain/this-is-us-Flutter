@@ -23,6 +23,7 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
     return Scaffold(
       drawer: AppDrawer(
         loggedInUser: widget.user,
+        enabled: 'Home',
       ),
       appBar: AppBar(
         title: Row(
@@ -50,6 +51,8 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
             );
           } else {
             return ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot ds = snapshot.data.documents[index];

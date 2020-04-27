@@ -5,6 +5,7 @@ import 'package:thisisus/screens/individual/emailLogin.dart';
 import 'package:thisisus/screens/individual/email_reg.dart';
 import 'package:thisisus/screens/individual/get_started.dart';
 import 'package:thisisus/screens/individual/indivisual_home.dart';
+import 'package:thisisus/screens/individual/saved_locs.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
 import 'package:thisisus/screens/org/org_get_started.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
           'orgLogin': (context) => OrgSignUpScreen(),
           'orgEmailReg': (context) => OrgEmailRegScreen(),
           'userHome': (context) => IndLandingScreen(),
+          'savedLocs': (context) => SavedLocsScreen(),
         },
       ),
     );

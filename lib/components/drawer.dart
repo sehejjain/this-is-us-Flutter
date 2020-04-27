@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:thisisus/screens/individual/saved_locs.dart';
 
 class AppDrawer extends StatefulWidget {
+  final enabled;
   final FirebaseUser loggedInUser;
 
-  AppDrawer({this.loggedInUser});
+  AppDrawer({this.loggedInUser, this.enabled});
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -35,6 +37,28 @@ class _AppDrawerState extends State<AppDrawer> {
                 color: Colors.black,
               ),
             ),
+          ),
+          ListTile(
+            title: Text('Home'),
+            enabled: widget.enabled != 'Home',
+            onTap: () {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+          ),
+          ListTile(
+            title: Text('My Saved Locations'),
+            enabled: widget.enabled != 'saved',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SavedLocsScreen(
+                        user: widget.loggedInUser,
+                      ),
+                ),
+              );
+            },
           ),
         ],
       ),
