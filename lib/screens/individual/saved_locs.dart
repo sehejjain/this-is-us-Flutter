@@ -39,7 +39,13 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
               ),
             );
           } else {
-            print(snapshot1.data.documents);
+            print(snapshot1.data.documents.length);
+            if (snapshot1.data.documents.length == 0)
+              return Container(
+                child: Center(
+                  child: Text('You\'ve not added anything yet'),
+                ),
+              );
             return Container(
               height: 1000,
               child: ListView.builder(
@@ -47,7 +53,7 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
                 shrinkWrap: true,
                 itemCount: snapshot1.data.documents.length,
                 itemBuilder: (context, index) {
-                  print(snapshot1.data.documents[index]);
+                  print(snapshot1.data.documents.length);
                   return StreamBuilder(
                     stream: Firestore.instance
                         .collection('VolLocs')
@@ -79,7 +85,11 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
                               (ds.data["dateCreated"]).toDate().toString()),
                         );
 
-                        return LocationCard(loc: location, user: widget.user);
+                        return LocationCard(
+                          loc: location,
+                          user: widget.user,
+                          bottomSheet: 'saved',
+                        );
                       }
                     },
                   );

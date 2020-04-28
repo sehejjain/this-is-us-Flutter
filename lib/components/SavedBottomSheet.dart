@@ -6,18 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
-class VolLocBottomSheet extends StatefulWidget {
+class SavedVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
   final FirebaseUser loggedInUser;
 
-  VolLocBottomSheet({Key key, @required this.loc, @required this.loggedInUser})
+  SavedVolLocBottomSheet(
+      {Key key, @required this.loc, @required this.loggedInUser})
       : super(key: key);
 
   @override
-  _VolLocBottomSheetState createState() => _VolLocBottomSheetState();
+  _SavedVolLocBottomSheetState createState() => _SavedVolLocBottomSheetState();
 }
 
-class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
+class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
@@ -74,7 +75,7 @@ class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
             ),
             RoundedLoadingButton(
               child: Text(
-                'Apply',
+                'Delete From Saved',
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.black,
@@ -84,13 +85,13 @@ class _VolLocBottomSheetState extends State<VolLocBottomSheet> {
                   print(widget.loc.id);
                   print(widget.loggedInUser.email);
                   print('asfaa${widget.loggedInUser.uid}');
-                  CollectionReference savedRef =
-                      Firestore.instance.collection('SavedLocs');
-                  await savedRef
+                  CollectionReference savedRef = Firestore.instance
+                      .collection('SavedLocs')
                       .document(widget.loggedInUser.uid)
-                      .collection('SavedUserLocs')
-                      .add({"date": DateTime.now(), "locID": widget.loc.id});
+                      .collection('SavedUserLocs');
+                  await savedRef.document(widget.loc.id).delete();
                   _btnController.success();
+                  Navigator.pop(context);
                 } catch (e) {
                   _btnController.reset();
                 }

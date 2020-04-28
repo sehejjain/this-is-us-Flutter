@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:thisisus/models/user_type_model.dart';
 import 'package:thisisus/services/user_repository.dart';
 
 import '../../constants.dart';
@@ -106,14 +104,7 @@ class _EmailRegScreenState extends State<EmailRegScreen> {
                               .user;
 
                           if (user != null) {
-                            UserType usertype = UserType(0);
-                            Map<String, dynamic> userTypeData =
-                            usertype.toJson();
-                            final CollectionReference userTypeRef =
-                            Firestore.instance.collection('UserTypes');
-                            await userTypeRef
-                                .document(user.uid)
-                                .setData(userTypeData);
+                            userRepo.setInd();
                           }
                           _btnController.success();
 

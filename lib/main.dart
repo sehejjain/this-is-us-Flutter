@@ -9,6 +9,7 @@ import 'package:thisisus/screens/individual/saved_locs.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
 import 'package:thisisus/screens/org/org_get_started.dart';
+import 'package:thisisus/screens/org/org_home_page.dart';
 import 'package:thisisus/services/user_repository.dart';
 
 void main() async {
@@ -51,9 +52,17 @@ class MyApp extends StatelessWidget {
                   ),
                 );
               case Status.Authenticated:
-                return IndLandingScreen(
-                  user: user.user,
-                );
+                {
+                  if (user.userType == 0) {
+                    return IndLandingScreen(
+                      user: user.user,
+                    );
+                  }
+
+                  return OrgLandingScreen(
+                    user: user.user,
+                  );
+                }
               default:
                 return HomePage();
             }

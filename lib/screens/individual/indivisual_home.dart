@@ -74,6 +74,7 @@ class _IndLandingScreenState extends State<IndLandingScreen> {
                 return LocationCard(
                   loc: location,
                   user: widget.user,
+                  bottomSheet: 'home',
                 );
               },
             );

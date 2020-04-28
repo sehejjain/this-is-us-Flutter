@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
-import 'BottomSheet.dart';
+import 'HomeBottomSheet.dart';
+import 'SavedBottomSheet.dart';
 
 class LocationCard extends StatelessWidget {
   final FirebaseUser user;
   final VolLoc loc;
+  final String bottomSheet;
 
-  LocationCard({this.loc, this.user});
+  LocationCard({this.loc, this.user, this.bottomSheet});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,12 @@ class LocationCard extends StatelessWidget {
                             .of(context)
                             .viewInsets
                             .bottom),
-                    child: VolLocBottomSheet(
+                    child: bottomSheet == 'home'
+                        ? HomeVolLocBottomSheet(
+                      loc: loc,
+                      loggedInUser: user,
+                    )
+                        : SavedVolLocBottomSheet(
                       loc: loc,
                       loggedInUser: user,
                     ),
