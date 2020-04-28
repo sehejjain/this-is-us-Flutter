@@ -1,17 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:thisisus/components/org_bottom_sheet.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
-import 'HomeBottomSheet.dart';
-import 'SavedBottomSheet.dart';
-
-class LocationCard extends StatelessWidget {
+class OrgLocationCard extends StatelessWidget {
   final FirebaseUser user;
   final VolLoc loc;
   final String bottomSheet;
 
-  LocationCard({this.loc, this.user, this.bottomSheet});
+  OrgLocationCard({this.loc, this.user, this.bottomSheet});
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +21,15 @@ class LocationCard extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) =>
-                SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery
-                            .of(context)
-                            .viewInsets
-                            .bottom),
-                    child: bottomSheet == 'home'
-                        ? HomeVolLocBottomSheet(
-                      loc: loc,
-                      loggedInUser: user,
-                    )
-                        : SavedVolLocBottomSheet(
-                      loc: loc,
-                      loggedInUser: user,
-                    ),
-                  ),
-                ),
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: OrgVolLocBottomSheet(
+                    loggedInUser: user,
+                    loc: loc,
+                  )),
+            ),
           );
         },
         child: Card(
@@ -87,8 +75,8 @@ class LocationCard extends StatelessWidget {
                   ),
                   Text(
                     'This is a sample Organisation\' sample '
-                        'Volunteering Location that would be deleted on '
-                        'pretty soon. Apply as soon as possible.\n ${loc.desc}',
+                    'Volunteering Location that would be deleted on '
+                    'pretty soon. Apply as soon as possible.\n ${loc.desc}',
                   ),
                   SizedBox(
                     height: 8,

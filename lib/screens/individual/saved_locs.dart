@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:thisisus/components/LocationCard.dart';
-import 'package:thisisus/components/drawer.dart';
+import 'package:thisisus/components/ind_location_card.dart';
+import 'package:thisisus/components/individual_drawer.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
 class SavedLocsScreen extends StatefulWidget {
@@ -85,7 +85,7 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
                               (ds.data["dateCreated"]).toDate().toString()),
                         );
 
-                        return LocationCard(
+                        return IndLocationCard(
                           loc: location,
                           user: widget.user,
                           bottomSheet: 'saved',
