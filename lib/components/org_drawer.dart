@@ -42,13 +42,16 @@ class _AppDrawerState extends State<AppDrawer> {
             title: Text('Home'),
             enabled: widget.enabled != 'Home',
             onTap: () {
+              Navigator.pop(context);
               Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.pop(context);
             },
           ),
           ListTile(
             title: Text('Create an opportunity'),
             enabled: widget.enabled != 'create',
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(

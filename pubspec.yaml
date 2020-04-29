@@ -28,7 +28,7 @@ dependencies:
   expansion_card: ^0.1.0
   shared_preferences: ^0.5.7
   provider: ^4.0.5
-
+  loading_overlay: ^0.2.1
 
 
 

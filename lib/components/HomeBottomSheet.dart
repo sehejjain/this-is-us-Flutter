@@ -22,7 +22,7 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
   final RoundedLoadingButtonController _btnController1 =
       new RoundedLoadingButtonController();
   final RoundedLoadingButtonController _btnController2 =
-  new RoundedLoadingButtonController();
+      new RoundedLoadingButtonController();
   @override
   Widget build(BuildContext context) {
     return Container(

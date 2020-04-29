@@ -25,10 +25,12 @@ class UserRepository with ChangeNotifier {
     try {
       _status = Status.Authenticating;
       notifyListeners();
-      var x = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      getUserType();
-      print(_userType);
+      var x = await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((onValue) {
+        getUserType();
+      });
+
       return x;
     } catch (e) {
       _status = Status.Unauthenticated;

@@ -48,14 +48,15 @@ class _AppliedScreenState extends State<AppliedScreen> {
                 stream: applicants.snapshots(),
                 builder: (context, snapshot2) {
                   if (!snapshot2.hasData)
-                    return Container(
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                    return SafeArea(
+                      child: Container(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     );
                   //print(snapshot2.data.documents);
                   for (var x in snapshot2.data.documents) {
-                    print(x);
                     if (x.data["userID"] == widget.user.uid) {
                       var location = VolLoc(
                         creator: ds.data["creator"],
@@ -83,7 +84,6 @@ class _AppliedScreenState extends State<AppliedScreen> {
               );
             },
           );
-          return Container();
         },
       ),
     );

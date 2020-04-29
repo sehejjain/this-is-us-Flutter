@@ -43,6 +43,8 @@ class _AppDrawerState extends State<AppDrawer> {
             title: Text('Home'),
             enabled: widget.enabled != 'Home',
             onTap: () {
+              Navigator.pop(context);
+
               Navigator.of(context).popUntil((route) => route.isFirst);
             },
           ),
@@ -50,6 +52,7 @@ class _AppDrawerState extends State<AppDrawer> {
             title: Text('My Saved Locations'),
             enabled: widget.enabled != 'saved',
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -65,6 +68,7 @@ class _AppDrawerState extends State<AppDrawer> {
             title: Text('Applied Locations'),
             enabled: widget.enabled != 'applied',
             onTap: () {
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(
