@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:thisisus/screens/individual/applied_screen.dart';
 import 'package:thisisus/screens/individual/saved_locs.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -54,6 +55,21 @@ class _AppDrawerState extends State<AppDrawer> {
                 MaterialPageRoute(
                   builder: (context) =>
                       SavedLocsScreen(
+                        user: widget.loggedInUser,
+                      ),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Applied Locations'),
+            enabled: widget.enabled != 'applied',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      AppliedScreen(
                         user: widget.loggedInUser,
                       ),
                 ),

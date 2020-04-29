@@ -39,7 +39,6 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
               ),
             );
           } else {
-            print(snapshot1.data.documents.length);
             if (snapshot1.data.documents.length == 0)
               return Container(
                 child: Center(
@@ -53,7 +52,6 @@ class _SavedLocsScreenState extends State<SavedLocsScreen> {
                 shrinkWrap: true,
                 itemCount: snapshot1.data.documents.length,
                 itemBuilder: (context, index) {
-                  print(snapshot1.data.documents.length);
                   return StreamBuilder(
                     stream: Firestore.instance
                         .collection('VolLocs')

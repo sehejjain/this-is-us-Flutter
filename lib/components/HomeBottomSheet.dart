@@ -83,14 +83,11 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
               controller: _btnController1,
               onPressed: () async {
                 try {
-                  print(widget.loc.id);
-                  print(widget.loggedInUser.email);
-                  print('asfaa${widget.loggedInUser.uid}');
                   CollectionReference savedRef = Firestore.instance
                       .collection('VolLocs')
                       .document(widget.loc.id)
                       .collection('Applicants');
-                  await savedRef.add({
+                  await savedRef.document(widget.loggedInUser.uid).setData({
                     'userID': widget.loggedInUser.uid,
                     'date_applied': DateTime.now(),
                   });
@@ -116,9 +113,6 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
               controller: _btnController2,
               onPressed: () async {
                 try {
-                  print(widget.loc.id);
-                  print(widget.loggedInUser.email);
-                  print('asfaa${widget.loggedInUser.uid}');
                   CollectionReference savedRef =
                       Firestore.instance.collection('SavedLocs');
                   await savedRef

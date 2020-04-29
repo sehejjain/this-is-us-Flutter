@@ -13,7 +13,6 @@ class OrgLocationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(user.email);
     return FractionallySizedBox(
       widthFactor: 1,
       child: GestureDetector(
