@@ -19,9 +19,10 @@ class HomeVolLocBottomSheet extends StatefulWidget {
 }
 
 class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
-  final RoundedLoadingButtonController _btnController =
+  final RoundedLoadingButtonController _btnController1 =
       new RoundedLoadingButtonController();
-
+  final RoundedLoadingButtonController _btnController2 =
+  new RoundedLoadingButtonController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +80,40 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.black,
-              controller: _btnController,
+              controller: _btnController1,
+              onPressed: () async {
+                try {
+                  print(widget.loc.id);
+                  print(widget.loggedInUser.email);
+                  print('asfaa${widget.loggedInUser.uid}');
+                  CollectionReference savedRef = Firestore.instance
+                      .collection('VolLocs')
+                      .document(widget.loc.id)
+                      .collection('Applicants');
+                  await savedRef.add({
+                    'userID': widget.loggedInUser.uid,
+                    'date_applied': DateTime.now(),
+                  });
+
+                  _btnController1.success();
+                  Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+                    Navigator.pop(context);
+                  });
+                } catch (e) {
+                  _btnController1.reset();
+                }
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            RoundedLoadingButton(
+              child: Text(
+                'Add To Saved',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.black,
+              controller: _btnController2,
               onPressed: () async {
                 try {
                   print(widget.loc.id);
@@ -97,12 +131,12 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
                         "locID": widget.loc.id
                   });
 
-                  _btnController.success();
+                  _btnController2.success();
                   Future.delayed(Duration(milliseconds: 500)).then((onValue) {
                     Navigator.pop(context);
                   });
                 } catch (e) {
-                  _btnController.reset();
+                  _btnController2.reset();
                 }
               },
             ),

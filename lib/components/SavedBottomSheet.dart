@@ -19,7 +19,9 @@ class SavedVolLocBottomSheet extends StatefulWidget {
 }
 
 class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
-  final RoundedLoadingButtonController _btnController =
+  final RoundedLoadingButtonController _btnController1 =
+  new RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _btnController2 =
       new RoundedLoadingButtonController();
 
   @override
@@ -75,11 +77,44 @@ class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
             ),
             RoundedLoadingButton(
               child: Text(
+                'Apply',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.black,
+              controller: _btnController1,
+              onPressed: () async {
+                try {
+                  print(widget.loc.id);
+                  print(widget.loggedInUser.email);
+                  print('asfaa${widget.loggedInUser.uid}');
+                  CollectionReference savedRef = Firestore.instance
+                      .collection('VolLocs')
+                      .document(widget.loc.id)
+                      .collection('Applicants');
+                  await savedRef.add({
+                    'userID': widget.loggedInUser.uid,
+                    'date_applied': DateTime.now(),
+                  });
+
+                  _btnController1.success();
+                  Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+                    Navigator.pop(context);
+                  });
+                } catch (e) {
+                  _btnController1.reset();
+                }
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            RoundedLoadingButton(
+              child: Text(
                 'Delete From Saved',
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.black,
-              controller: _btnController,
+              controller: _btnController2,
               onPressed: () async {
                 try {
                   print(widget.loc.id);
@@ -90,10 +125,10 @@ class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
                       .document(widget.loggedInUser.uid)
                       .collection('SavedUserLocs');
                   await savedRef.document(widget.loc.id).delete();
-                  _btnController.success();
+                  _btnController2.success();
                   Navigator.pop(context);
                 } catch (e) {
-                  _btnController.reset();
+                  _btnController2.reset();
                 }
               },
             ),
