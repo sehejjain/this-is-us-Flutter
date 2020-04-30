@@ -22,25 +22,21 @@ class IndLocationCard extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) =>
-                SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery
-                            .of(context)
-                            .viewInsets
-                            .bottom),
-                    child: bottomSheet == 'home'
-                        ? HomeVolLocBottomSheet(
-                      loc: loc,
-                      loggedInUser: user,
-                    )
-                        : SavedVolLocBottomSheet(
-                      loc: loc,
-                      loggedInUser: user,
-                    ),
-                  ),
-                ),
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: bottomSheet == 'home'
+                    ? HomeVolLocBottomSheet(
+                        loc: loc,
+                        loggedInUser: user,
+                      )
+                    : SavedVolLocBottomSheet(
+                        loc: loc,
+                        loggedInUser: user,
+                      ),
+              ),
+            ),
           );
         },
         child: Card(
@@ -86,8 +82,8 @@ class IndLocationCard extends StatelessWidget {
                   ),
                   Text(
                     'This is a sample Organisation\' sample '
-                        'Volunteering Location that would be deleted on '
-                        'pretty soon. Apply as soon as possible.\n ${loc.desc}',
+                    'Volunteering Location that would be deleted on '
+                    'pretty soon. Apply as soon as possible.\n ${loc.desc}',
                   ),
                   SizedBox(
                     height: 8,
