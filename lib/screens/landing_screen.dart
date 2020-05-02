@@ -1,55 +1,55 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:thisisus/screens/home_screen.dart';
 import 'package:thisisus/screens/individual/indivisual_home.dart';
 import 'package:thisisus/screens/org/org_home_page.dart';
 import 'package:thisisus/services/user_repository.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   final FirebaseUser user;
 
   LandingPage({this.user});
 
-//TODO: NOT WORKING FIX NOWWWWWWW
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  @override
+  void initState() {
+    // Fixed
+    super.initState();
+    Provider.of<UserRepository>(context, listen: false).getUserType();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Loading...'),
-      ),
-      body: StreamBuilder<FirebaseUser>(
-        stream: FirebaseAuth.instance.onAuthStateChanged,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            FirebaseUser user = snapshot.data;
-            if (user == null) {
-              return HomePage();
-            }
-            return Consumer<UserRepository>(
-              builder: (context, user, _) {
-                print(user.userType);
-                print(user.user.uid);
-                if (user.userType == 0) {
-                  return IndHomeScreen();
-                }
-                if (user.userType == 1) return OrgHomeScreen();
-
-                return Container(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              },
-            );
-          } else {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
+    if (Provider
+        .of<UserRepository>(context, listen: false)
+        .userType == 0) {
+      return IndHomeScreen(
+        user: Provider
+            .of<UserRepository>(context, listen: false)
+            .user,
+      );
+    } else if (Provider
+        .of<UserRepository>(context, listen: false)
+        .userType ==
+        1) {
+      return OrgHomeScreen(
+        user: Provider
+            .of<UserRepository>(context, listen: false)
+            .user,
+      );
+    }
+    print(Provider
+        .of<UserRepository>(context)
+        .userType);
+    setState(() {});
+    //TODO: Implement Splash Screen Here too
+    return SafeArea(
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

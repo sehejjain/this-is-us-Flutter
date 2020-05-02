@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.white,
         ),
         home: Consumer(
+          // ignore: missing_return
           builder: (context, UserRepository user, _) {
             switch (user.status) {
               case Status.Uninitialized:
@@ -53,9 +54,7 @@ class MyApp extends StatelessWidget {
                 );
               case Status.Authenticated:
                 {
-                  return LandingPage(
-                    user: user.user,
-                  );
+                  return LandingPage();
                 }
               default:
                 return HomePage();

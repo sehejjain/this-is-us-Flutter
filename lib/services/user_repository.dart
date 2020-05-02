@@ -28,8 +28,9 @@ class UserRepository with ChangeNotifier {
       var x = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((onValue) {
-        getUserType();
-        print(_userType);
+        getUserType().then((onValue) {
+          print(_userType);
+        });
       });
 
       return x;
@@ -40,7 +41,8 @@ class UserRepository with ChangeNotifier {
     }
   }
 
-  void getUserType() async {
+  // ignore: missing_return
+  Future<int> getUserType() async {
     if (_status == Status.Authenticated) {
       await Firestore.instance
           .collection('UserTypes')
@@ -48,7 +50,9 @@ class UserRepository with ChangeNotifier {
           .get()
           .then((onValue) {
         _userType = onValue.data["type"];
+
         notifyListeners();
+        return onValue.data["type"];
       });
     }
   }

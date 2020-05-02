@@ -27,7 +27,7 @@ class _OrgHomeScreenState extends State<OrgHomeScreen> {
       appBar: AppBar(
         title: Row(
           children: <Widget>[
-            Text('Org Home'),
+            Text('My Locations'),
             FlatButton(
               //Temp Button. Remove when Drawer has been implemented.
               child: Text('Sign Out'),
