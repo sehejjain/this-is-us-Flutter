@@ -88,15 +88,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 5 * vertVal,
-                    ),
-                    FlatButton(
-                      child: Text('\\VolLoc'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'createVolLoc');
-                      },
-                    ),
                   ],
                 ),
               ),

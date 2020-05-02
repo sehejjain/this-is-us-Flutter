@@ -18,7 +18,7 @@ class LandingPage extends StatelessWidget {
           if (user == null) {
             return HomePage();
           }
-          return IndLandingScreen(
+          return IndHomeScreen(
             user: user,
           );
         } else {

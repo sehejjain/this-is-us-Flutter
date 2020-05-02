@@ -56,10 +56,9 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      SavedLocsScreen(
-                        user: widget.loggedInUser,
-                      ),
+                  builder: (context) => SavedLocsScreen(
+                    user: widget.loggedInUser,
+                  ),
                 ),
               );
             },
@@ -72,10 +71,9 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      AppliedScreen(
-                        user: widget.loggedInUser,
-                      ),
+                  builder: (context) => AppliedScreen(
+                    user: widget.loggedInUser,
+                  ),
                 ),
               );
             },

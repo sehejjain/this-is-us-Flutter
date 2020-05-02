@@ -7,16 +7,16 @@ import 'package:thisisus/components/org_location_card.dart';
 import 'package:thisisus/models/LocationModel.dart';
 import 'package:thisisus/services/user_repository.dart';
 
-class OrgLandingScreen extends StatefulWidget {
+class OrgHomeScreen extends StatefulWidget {
   final FirebaseUser user;
 
-  OrgLandingScreen({this.user});
+  OrgHomeScreen({this.user});
 
   @override
-  _OrgLandingScreenState createState() => _OrgLandingScreenState();
+  _OrgHomeScreenState createState() => _OrgHomeScreenState();
 }
 
-class _OrgLandingScreenState extends State<OrgLandingScreen> {
+class _OrgHomeScreenState extends State<OrgHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

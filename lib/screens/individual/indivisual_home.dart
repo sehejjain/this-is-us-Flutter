@@ -7,16 +7,16 @@ import 'package:thisisus/components/individual_drawer.dart';
 import 'package:thisisus/models/LocationModel.dart';
 import 'package:thisisus/services/user_repository.dart';
 
-class IndLandingScreen extends StatefulWidget {
+class IndHomeScreen extends StatefulWidget {
   final FirebaseUser user;
 
-  const IndLandingScreen({Key key, this.user}) : super(key: key);
+  const IndHomeScreen({Key key, this.user}) : super(key: key);
 
   @override
-  _IndLandingScreenState createState() => _IndLandingScreenState();
+  _IndHomeScreenState createState() => _IndHomeScreenState();
 }
 
-class _IndLandingScreenState extends State<IndLandingScreen> {
+class _IndHomeScreenState extends State<IndHomeScreen> {
   @override
   Widget build(BuildContext context) {
     //TODO: Implement Drawer
