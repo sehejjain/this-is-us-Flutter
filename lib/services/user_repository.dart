@@ -29,6 +29,7 @@ class UserRepository with ChangeNotifier {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((onValue) {
         getUserType();
+        print(_userType);
       });
 
       return x;
