@@ -15,22 +15,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     print('object');
-    var horizVal = displaySafeWidthBlocks(context);
-    var vertVal = displaySafeHeightBlocks(context);
+    var horizontalVal = displaySafeWidthBlocks(context);
+    var verticalVal = displaySafeHeightBlocks(context);
 
     return Scaffold(
       body: SafeArea(
         child: Container(
-          width: 100 * vertVal,
+          width: 100 * verticalVal,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 20 * vertVal,
+                height: 20 * verticalVal,
               ),
               Container(
-                width: 80 * horizVal,
-                height: 20 * vertVal,
+                width: 80 * horizontalVal,
+                height: 20 * verticalVal,
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -45,8 +45,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 15 * vertVal,
-                width: 90 * vertVal,
+                height: 15 * verticalVal,
+                width: 90 * verticalVal,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
@@ -60,10 +60,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 10 * vertVal,
+                height: 10 * verticalVal,
               ),
               Container(
-                height: 30 * vertVal,
+                height: 30 * verticalVal,
                 child: Column(
                   children: <Widget>[
                     Padding(

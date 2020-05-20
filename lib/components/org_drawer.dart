@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
+import 'package:thisisus/services/user_repository.dart';
 
 class AppDrawer extends StatefulWidget {
   final enabled;
@@ -59,6 +61,12 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 ),
               );
+            },
+          ),
+          ListTile(
+            title: Text('Sign Out'),
+            onTap: () {
+              Provider.of<UserRepository>(context, listen: false).signOut();
             },
           ),
         ],

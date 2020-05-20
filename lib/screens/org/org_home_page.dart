@@ -17,6 +17,7 @@ class OrgHomeScreen extends StatefulWidget {
 }
 
 class _OrgHomeScreenState extends State<OrgHomeScreen> {
+  List<Widget> widgets = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +26,7 @@ class _OrgHomeScreenState extends State<OrgHomeScreen> {
         enabled: 'Home',
       ),
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            Text('My Locations'),
-            FlatButton(
-              //Temp Button. Remove when Drawer has been implemented.
-              child: Text('Sign Out'),
-              onPressed: () {
-                Provider.of<UserRepository>(context, listen: false).signOut();
-              },
-            ),
-          ],
-        ),
+        title: Text('My Locations'),
       ),
       body: StreamBuilder(
         stream: Firestore.instance.collection('VolLocs').snapshots(),
@@ -48,36 +38,41 @@ class _OrgHomeScreenState extends State<OrgHomeScreen> {
               ),
             );
           } else {
+            if (snapshot.data.documents.length == 0) {
+              return Center(
+                child: Text('No Opportunities created yet'),
+              );
+            }
+            for (var document in snapshot.data.documents) {
+              var loc = VolLoc.fromJson(document.data);
+
+              if (loc.creator == widget.user.uid) {
+                widgets.add(
+                  OrgLocationCard(
+                    loc: loc,
+                    user: widget.user,
+                    bottomSheet: 'home',
+                  ),
+                );
+              }
+            }
             return ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot ds = snapshot.data.documents[index];
-                var location = VolLoc(
-                  creator: ds.data["creator"],
-                  name: ds.data["name"],
-                  contactPhone: ds.data["contact_phone"],
-                  contactEmail: ds.data["contact_email"],
-                  dateStart: DateTime.parse(
-                      (ds.data["dateStart"]).toDate().toString()),
-                  dateEnd:
-                  DateTime.parse((ds.data["dateEnd"]).toDate().toString()),
-                  location: ds.data["location"],
-                  desc: ds.data["desc"],
-                  id: ds.documentID,
-                  dateCreated: DateTime.parse(
-                      (ds.data["dateCreated"]).toDate().toString()),
-                );
-                if (location.creator == widget.user.uid) {
+                var loc = VolLoc.fromJson(ds.data);
+                loc.id = ds.documentID;
+                if (snapshot.data.documents[index].data['creator'] ==
+                    widget.user.uid) {
                   return OrgLocationCard(
-                    loc: location,
+                    loc: loc,
                     user: widget.user,
                     bottomSheet: 'home',
                   );
                 } else
-                  return null;
+                  //empty container, doesn't work otherwise
+                  return Container();
               },
+              itemCount: snapshot.data.documents.length,
             );
           }
         },

@@ -11,6 +11,7 @@ import 'package:thisisus/screens/org/create_vol_loc.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
 import 'package:thisisus/screens/org/org_get_started.dart';
 import 'package:thisisus/services/user_repository.dart';
+import 'package:thisisus/screens/splash_screen.dart';
 
 void main() async {
   return runApp(MyApp());
@@ -38,25 +39,20 @@ class MyApp extends StatelessWidget {
           builder: (context, UserRepository user, _) {
             switch (user.status) {
               case Status.Uninitialized:
-              //TODO: Add Splash Screen Here
-                return Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                //TODO: Add Splash Screen Here
+                return SplashScreen();
               case Status.Unauthenticated:
                 return HomePage();
               case Status.Authenticating:
                 return Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  body: SplashScreen(),
                 );
               case Status.Authenticated:
                 {
                   return LandingPage();
                 }
               default:
+                //return HomePage();
                 return HomePage();
             }
           },

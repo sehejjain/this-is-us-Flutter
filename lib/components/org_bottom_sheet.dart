@@ -9,10 +9,14 @@ import 'package:thisisus/models/LocationModel.dart';
 class OrgVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
   final FirebaseUser loggedInUser;
+  final String orgName;
 
-  OrgVolLocBottomSheet(
-      {Key key, @required this.loc, @required this.loggedInUser})
-      : super(key: key);
+  OrgVolLocBottomSheet({
+    Key key,
+    @required this.loc,
+    @required this.loggedInUser,
+    this.orgName,
+  }) : super(key: key);
 
   @override
   _OrgVolLocBottomSheetState createState() => _OrgVolLocBottomSheetState();
@@ -46,7 +50,7 @@ class _OrgVolLocBottomSheetState extends State<OrgVolLocBottomSheet> {
               ),
             ),
             Text(
-              widget.loc.creator,
+              widget.orgName,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0, color: Colors.pink),
             ),
@@ -84,7 +88,6 @@ class _OrgVolLocBottomSheetState extends State<OrgVolLocBottomSheet> {
                 try {
                   print(widget.loc.id);
                   print(widget.loggedInUser.email);
-                  print('asfaa${widget.loggedInUser.uid}');
                   var savedRef = Firestore.instance.collection('VolLocs');
 //Not Working
                   //TODO: Fix

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class EmailRegScreen extends StatefulWidget {
 class _EmailRegScreenState extends State<EmailRegScreen> {
   String email;
   String password;
+  String name;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
@@ -38,6 +40,30 @@ class _EmailRegScreenState extends State<EmailRegScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                    Card(
+                      margin: EdgeInsets.all(10.0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
+                        title: TextField(
+                          onChanged: (value) {
+                            name = value;
+                          },
+                          style: TextStyle(
+                            color: Colors.teal.shade900,
+                            fontSize: 20.0,
+                            fontFamily: 'Source Sans Pro',
+                          ),
+                          decoration: kTextFieldDecoration.copyWith(
+                              hintText: 'Enter your Name'),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
                     Card(
                       margin: EdgeInsets.all(10.0),
                       child: ListTile(
@@ -100,8 +126,13 @@ class _EmailRegScreenState extends State<EmailRegScreen> {
                         try {
                           print('ada');
                           final FirebaseUser user = (await userRepo.createUser(
-                              email: email, password: password))
+                                  email: email, password: password))
                               .user;
+                          Firestore.instance.runTransaction((Transaction tx) {
+                            return Firestore.instance
+                                .collection('Users')
+                                .add({'name': name});
+                          });
 
                           if (user != null) {
                             userRepo.setInd();

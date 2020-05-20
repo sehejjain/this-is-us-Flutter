@@ -58,23 +58,10 @@ class _AppliedScreenState extends State<AppliedScreen> {
                   //print(snapshot2.data.documents);
                   for (var x in snapshot2.data.documents) {
                     if (x.data["userID"] == widget.user.uid) {
-                      var location = VolLoc(
-                        creator: ds.data["creator"],
-                        name: ds.data["name"],
-                        contactPhone: ds.data["contact_phone"],
-                        contactEmail: ds.data["contact_email"],
-                        dateStart: DateTime.parse(
-                            (ds.data["dateStart"]).toDate().toString()),
-                        dateEnd: DateTime.parse(
-                            (ds.data["dateEnd"]).toDate().toString()),
-                        location: ds.data["location"],
-                        desc: ds.data["desc"],
-                        id: ds.documentID,
-                        dateCreated: DateTime.parse(
-                            (ds.data["dateCreated"]).toDate().toString()),
-                      );
+                      var vol = VolLoc.fromJson(ds.data);
+
                       return IndLocationCard(
-                        loc: location,
+                        loc: vol,
                         user: widget.user,
                       );
                     }

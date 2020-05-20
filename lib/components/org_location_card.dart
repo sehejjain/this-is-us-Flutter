@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:thisisus/components/org_bottom_sheet.dart';
 import 'package:thisisus/models/LocationModel.dart';
 
-class OrgLocationCard extends StatelessWidget {
+class OrgLocationCard extends StatefulWidget {
   final FirebaseUser user;
   final VolLoc loc;
   final String bottomSheet;
@@ -12,7 +14,34 @@ class OrgLocationCard extends StatelessWidget {
   OrgLocationCard({this.loc, this.user, this.bottomSheet});
 
   @override
+  _OrgLocationCardState createState() => _OrgLocationCardState();
+}
+
+class _OrgLocationCardState extends State<OrgLocationCard> {
+  String orgName = 'Loading';
+  void getOrgName() async {
+    Firestore.instance
+        .collection('Orgs')
+        .document(widget.user.uid)
+        .get()
+        .then((doc) {
+      print(doc.data);
+      setState(() {
+        orgName = doc.data['name'];
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    getOrgName();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(orgName);
     return FractionallySizedBox(
       widthFactor: 1,
       child: GestureDetector(
@@ -25,8 +54,9 @@ class OrgLocationCard extends StatelessWidget {
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: OrgVolLocBottomSheet(
-                    loggedInUser: user,
-                    loc: loc,
+                    orgName: orgName,
+                    loggedInUser: widget.user,
+                    loc: widget.loc,
                   )),
             ),
           );
@@ -49,7 +79,7 @@ class OrgLocationCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                loc.name,
+                                widget.loc.name,
                                 textAlign: TextAlign.right,
                                 style: TextStyle(fontSize: 20),
                               ),
@@ -60,7 +90,7 @@ class OrgLocationCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                'afasfas',
+                                orgName,
                                 style: TextStyle(color: Colors.pink),
                               ),
                             ),
@@ -75,7 +105,7 @@ class OrgLocationCard extends StatelessWidget {
                   Text(
                     'This is a sample Organisation\' sample '
                     'Volunteering Location that would be deleted on '
-                    'pretty soon. Apply as soon as possible.\n ${loc.desc}',
+                    'pretty soon. Apply as soon as possible.\n ${widget.loc.desc}',
                   ),
                   SizedBox(
                     height: 8,
@@ -87,12 +117,12 @@ class OrgLocationCard extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: DateFormat('EEE, MMM d, ' 'yyyy')
-                                .format(loc.dateStart),
+                                .format(widget.loc.dateStart),
                           ),
                           TextSpan(text: ' to '),
                           TextSpan(
                             text: DateFormat('EEE, MMM d, ' 'yyyy').format(
-                              loc.dateEnd,
+                              widget.loc.dateEnd,
                             ),
                           )
                         ],

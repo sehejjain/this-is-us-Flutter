@@ -9,9 +9,10 @@ import 'package:thisisus/models/LocationModel.dart';
 class HomeVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
   final FirebaseUser loggedInUser;
+  final String orgName;
 
   HomeVolLocBottomSheet(
-      {Key key, @required this.loc, @required this.loggedInUser})
+      {Key key, @required this.loc, @required this.loggedInUser, this.orgName})
       : super(key: key);
 
   @override
@@ -47,7 +48,7 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
               ),
             ),
             Text(
-              widget.loc.creator,
+              widget.orgName,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0, color: Colors.pink),
             ),

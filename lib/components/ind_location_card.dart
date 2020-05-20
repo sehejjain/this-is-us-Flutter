@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,12 +7,37 @@ import 'package:thisisus/models/LocationModel.dart';
 import 'HomeBottomSheet.dart';
 import 'SavedBottomSheet.dart';
 
-class IndLocationCard extends StatelessWidget {
+class IndLocationCard extends StatefulWidget {
   final FirebaseUser user;
   final VolLoc loc;
   final String bottomSheet;
 
   IndLocationCard({this.loc, this.user, this.bottomSheet});
+
+  @override
+  _IndLocationCardState createState() => _IndLocationCardState();
+}
+
+class _IndLocationCardState extends State<IndLocationCard> {
+  String orgName = 'Loading';
+  void getOrgName() async {
+    Firestore.instance
+        .collection('Orgs')
+        .document(widget.loc.creator)
+        .get()
+        .then((doc) {
+      print(doc.data);
+      setState(() {
+        orgName = doc.data['name'];
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getOrgName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +52,16 @@ class IndLocationCard extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: bottomSheet == 'home'
+                child: widget.bottomSheet == 'home'
                     ? HomeVolLocBottomSheet(
-                        loc: loc,
-                        loggedInUser: user,
+                        orgName: orgName,
+                        loc: widget.loc,
+                        loggedInUser: widget.user,
                       )
                     : SavedVolLocBottomSheet(
-                        loc: loc,
-                        loggedInUser: user,
+                        orgName: orgName,
+                        loc: widget.loc,
+                        loggedInUser: widget.user,
                       ),
               ),
             ),
@@ -57,7 +85,7 @@ class IndLocationCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                loc.name,
+                                widget.loc.name,
                                 textAlign: TextAlign.right,
                                 style: TextStyle(fontSize: 20),
                               ),
@@ -68,7 +96,7 @@ class IndLocationCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                'afasfas',
+                                orgName,
                                 style: TextStyle(color: Colors.pink),
                               ),
                             ),
@@ -83,7 +111,7 @@ class IndLocationCard extends StatelessWidget {
                   Text(
                     'This is a sample Organisation\' sample '
                     'Volunteering Location that would be deleted on '
-                    'pretty soon. Apply as soon as possible.\n ${loc.desc}',
+                    'pretty soon. Apply as soon as possible.\n ${widget.loc.desc}',
                   ),
                   SizedBox(
                     height: 8,
@@ -95,12 +123,12 @@ class IndLocationCard extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: DateFormat('EEE, MMM d, ' 'yyyy')
-                                .format(loc.dateStart),
+                                .format(widget.loc.dateStart),
                           ),
                           TextSpan(text: ' to '),
                           TextSpan(
                             text: DateFormat('EEE, MMM d, ' 'yyyy').format(
-                              loc.dateEnd,
+                              widget.loc.dateEnd,
                             ),
                           )
                         ],

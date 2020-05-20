@@ -9,10 +9,14 @@ import 'package:thisisus/models/LocationModel.dart';
 class SavedVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
   final FirebaseUser loggedInUser;
+  final String orgName;
 
-  SavedVolLocBottomSheet(
-      {Key key, @required this.loc, @required this.loggedInUser})
-      : super(key: key);
+  SavedVolLocBottomSheet({
+    Key key,
+    @required this.loc,
+    @required this.loggedInUser,
+    this.orgName,
+  }) : super(key: key);
 
   @override
   _SavedVolLocBottomSheetState createState() => _SavedVolLocBottomSheetState();
@@ -20,7 +24,7 @@ class SavedVolLocBottomSheet extends StatefulWidget {
 
 class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
   final RoundedLoadingButtonController _btnController1 =
-  new RoundedLoadingButtonController();
+      new RoundedLoadingButtonController();
   final RoundedLoadingButtonController _btnController2 =
       new RoundedLoadingButtonController();
 
@@ -48,7 +52,7 @@ class _SavedVolLocBottomSheetState extends State<SavedVolLocBottomSheet> {
               ),
             ),
             Text(
-              widget.loc.creator,
+              widget.orgName,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0, color: Colors.pink),
             ),

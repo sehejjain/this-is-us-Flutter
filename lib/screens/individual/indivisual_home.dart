@@ -26,19 +26,7 @@ class _IndHomeScreenState extends State<IndHomeScreen> {
         enabled: 'Home',
       ),
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Home'),
-            FlatButton(
-              //Temp Button. Remove when Drawer has been implemented.
-              child: Text('Sign Out'),
-              onPressed: () {
-                Provider.of<UserRepository>(context, listen: false).signOut();
-              },
-            ),
-          ],
-        ),
+        title: Text('Home'),
       ),
       body: StreamBuilder(
         stream: Firestore.instance.collection("VolLocs").snapshots(),
@@ -56,23 +44,10 @@ class _IndHomeScreenState extends State<IndHomeScreen> {
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot ds = snapshot.data.documents[index];
-                var location = VolLoc(
-                  creator: ds.data["creator"],
-                  name: ds.data["name"],
-                  contactPhone: ds.data["contact_phone"],
-                  contactEmail: ds.data["contact_email"],
-                  dateStart: DateTime.parse(
-                      (ds.data["dateStart"]).toDate().toString()),
-                  dateEnd:
-                  DateTime.parse((ds.data["dateEnd"]).toDate().toString()),
-                  location: ds.data["location"],
-                  desc: ds.data["desc"],
-                  id: ds.documentID,
-                  dateCreated: DateTime.parse(
-                      (ds.data["dateCreated"]).toDate().toString()),
-                );
+                var vol = VolLoc.fromJson(ds.data);
+
                 return IndLocationCard(
-                  loc: location,
+                  loc: vol,
                   user: widget.user,
                   bottomSheet: 'home',
                 );

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class OrgEmailRegScreen extends StatefulWidget {
 class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
   String email;
   String password;
+  String name;
   RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
 
@@ -37,6 +39,28 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                    Card(
+                      margin: EdgeInsets.all(10.0),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        ),
+                        title: TextField(
+                          onChanged: (value) {
+                            name = value;
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(
+                            color: Colors.teal.shade900,
+                            fontSize: 20.0,
+                            fontFamily: 'Source Sans Pro',
+                          ),
+                          decoration: kTextFieldDecoration.copyWith(
+                              hintText: 'Enter your Name'),
+                        ),
+                      ),
+                    ),
                     Card(
                       margin: EdgeInsets.all(10.0),
                       child: ListTile(
@@ -97,8 +121,13 @@ class _OrgEmailRegScreenState extends State<OrgEmailRegScreen> {
                       onPressed: () async {
                         try {
                           FirebaseUser user = (await userRepo.createUser(
-                              email: email, password: password))
+                                  email: email, password: password))
                               .user;
+                          Firestore.instance.runTransaction((Transaction tx) {
+                            return Firestore.instance
+                                .collection('Orgs')
+                                .add({'name': name, 'id': user.uid});
+                          });
                           if (user != null) {
                             //Go On
                             userRepo.setOrg();

@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>524359812404-tj8mg400ir5cg93k6726avbit400sgrv.apps.googleusercontent.com</string>
+	<string>524359812404-v3ffhu5tmdvp5ejih5229qc7bph52h9i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.524359812404-tj8mg400ir5cg93k6726avbit400sgrv</string>
+	<string>com.googleusercontent.apps.524359812404-v3ffhu5tmdvp5ejih5229qc7bph52h9i</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDFb2RTnlNRjabYT3xEcTWPxwAWdViS0z4</string>
+	<string>AIzaSyACTHRrfRWr_Ik_VI2VORh7i5P7Hh-taPE</string>
 	<key>GCM_SENDER_ID</key>
 	<string>524359812404</string>
 	<key>PLIST_VERSION</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:524359812404:ios:e305dfb2b5b8b7898a1161</string>
+	<string>1:524359812404:ios:25d8859ae355356b8a1161</string>
 	<key>DATABASE_URL</key>
 	<string>https://this-is-us-fd724.firebaseio.com</string>
 </dict>

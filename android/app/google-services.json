@@ -8,28 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:524359812404:android:921f0f5c4d6b92908a1161",
+        "mobilesdk_app_id": "1:524359812404:android:ae8ad799ff1f8d6e8a1161",
         "android_client_info": {
           "package_name": "com.sehej.thisisus"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "524359812404-5tf60ek7ai3umlfacbuc2mvdguutrvjp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBgeGusnAm-haIHWqlsTXPpqKGwOqMCUqM"
+          "current_key": "AIzaSyACTHRrfRWr_Ik_VI2VORh7i5P7Hh-taPE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "524359812404-5tf60ek7ai3umlfacbuc2mvdguutrvjp.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "524359812404-v3ffhu5tmdvp5ejih5229qc7bph52h9i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sehej.thisisus"
+              }
             }
           ]
         }

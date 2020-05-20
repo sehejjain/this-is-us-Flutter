@@ -21,10 +21,14 @@ class CreateVolLoc extends StatefulWidget {
 
 class _CreateVolLocState extends State<CreateVolLoc> {
   Future<LocationResult> showPlacePicker() async {
+    setState(() {});
     LocationResult result = await Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
             PlacePicker("AIzaSyCYFdGWM2mkC3B45CGn3YDXDl979cMt81c")));
     // Handle the result in your way
+    print('\n\n\n\n\n' +
+        result.latLng.longitude.toString() +
+        '\n\n\n\n\n\n\n\n\n');
     return result;
   }
 
@@ -77,12 +81,6 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                 onChange: (value) {
                   phone = value;
                 }),
-            TextCard(
-                hintText: 'Date',
-                icon: FontAwesomeIcons.arrowRight,
-                onChange: (value) {
-                  name = value;
-                }),
             FractionallySizedBox(
               widthFactor: 1,
               child: Card(
@@ -95,7 +93,7 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                       location == null
                           ? '    Pick a Location'
                           : '    Somewhere'
-                          ' in ${location.name}',
+                              ' in ${location.name}',
                       style: TextStyle(
                           fontSize: 20,
                           color: location == null ? Colors.grey : Colors.black),
@@ -104,6 +102,7 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                   onPressed: () async {
                     setState(() async {
                       location = await showPlacePicker();
+                      setState(() {});
                     });
                   },
                 ),
@@ -135,7 +134,7 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                       start == null
                           ? '    Start Date: Show DateTime Picker'
                           : new DateFormat('    EEE, MMM d, ' 'yyyy')
-                          .format(start),
+                              .format(start),
                     ),
                   ),
                 ),
@@ -167,7 +166,7 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                       end == null
                           ? '    End Date: Show DateTime Picker'
                           : new DateFormat('    EEE, MMM d, ' 'yyyy')
-                          .format(end),
+                              .format(end),
                     ),
                   ),
                 ),
@@ -200,14 +199,11 @@ class _CreateVolLocState extends State<CreateVolLoc> {
                       dateCreated: DateTime.now(),
                       dateEnd: end,
                       dateStart: start);
+                  print(vol.creator);
                   CollectionReference dbLocs =
-                  Firestore.instance.collection('VolLocs');
+                      Firestore.instance.collection('VolLocs');
                   Firestore.instance.runTransaction((Transaction tx) async {
                     await dbLocs.add(vol.toJson());
-
-                    final snackBar =
-                    SnackBar(content: Text('Yay! A SnackBar!'));
-                    Scaffold.of(context).showSnackBar(snackBar);
                     Navigator.pop(context);
                   });
                 });
