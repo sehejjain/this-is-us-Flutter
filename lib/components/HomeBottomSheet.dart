@@ -1,10 +1,14 @@
 import 'dart:ui';
-
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/models/LocationModel.dart';
+import 'package:geocoder/geocoder.dart';
+
 
 class HomeVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
@@ -24,6 +28,8 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
       new RoundedLoadingButtonController();
   final RoundedLoadingButtonController _btnController2 =
       new RoundedLoadingButtonController();
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,7 +74,7 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
               height: 10,
             ),
             Text(
-              'Location: ${widget.loc.location}',
+              'Location: ${widget.loc.locString}',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20.0),
             ),
@@ -84,6 +90,7 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
               controller: _btnController1,
               onPressed: () async {
                 try {
+                  print(widget.loc.id);
                   CollectionReference savedRef = Firestore.instance
                       .collection('VolLocs')
                       .document(widget.loc.id)

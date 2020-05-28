@@ -189,16 +189,18 @@ class _CreateVolLocState extends State<CreateVolLoc> {
               onPressed: () {
                 setState(() {
                   VolLoc vol = VolLoc(
-                      creator: widget.user.uid,
-                      name: name,
-                      contactEmail: email,
-                      contactPhone: phone,
-                      location: GeoPoint(
-                          location.latLng.latitude, location.latLng.longitude),
-                      desc: 'none yet',
-                      dateCreated: DateTime.now(),
-                      dateEnd: end,
-                      dateStart: start);
+                    creator: widget.user.uid,
+                    name: name,
+                    contactEmail: email,
+                    contactPhone: phone,
+                    location: GeoPoint(
+                        location.latLng.latitude, location.latLng.longitude),
+                    desc: 'none yet',
+                    dateCreated: DateTime.now(),
+                    dateEnd: end,
+                    dateStart: start,
+                    locString: location.locality,
+                  );
                   print(vol.creator);
                   CollectionReference dbLocs =
                       Firestore.instance.collection('VolLocs');

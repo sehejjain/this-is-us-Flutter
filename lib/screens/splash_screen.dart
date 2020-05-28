@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:thisisus/services/size_config.dart';
+
+import '../services/user_repository.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -48,6 +51,12 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          OutlineButton(
+            child: Text('Sign Out'),
+            onPressed: (){
+              Provider.of<UserRepository>(context, listen: false).signOut();
+            },
           ),
           SizedBox(
             width: horizontalVal * 10,

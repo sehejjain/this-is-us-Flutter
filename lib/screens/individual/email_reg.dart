@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/services/user_repository.dart';
 
-import '../../constants.dart';
+import '../../constants/constants.dart';
 
 class EmailRegScreen extends StatefulWidget {
   @override

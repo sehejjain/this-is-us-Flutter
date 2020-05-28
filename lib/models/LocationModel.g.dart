@@ -19,6 +19,7 @@ VolLoc _$VolLocFromJson(Map<String, dynamic> json) {
     dateCreated:
         VolLoc._dateTimeFromTimestamp(json['dateCreated'] as Timestamp),
     desc: json['desc'] as String,
+    locString: json['locString'] as String,
   );
 }
 
@@ -28,6 +29,7 @@ Map<String, dynamic> _$VolLocToJson(VolLoc instance) => <String, dynamic>{
       'id': instance.id,
       'contactEmail': instance.contactEmail,
       'contactPhone': instance.contactPhone,
+      'locString': instance.locString,
       'dateStart': VolLoc._dateTimeAsIs(instance.dateStart),
       'dateEnd': VolLoc._dateTimeAsIs(instance.dateEnd),
       'dateCreated': VolLoc._dateTimeAsIs(instance.dateCreated),

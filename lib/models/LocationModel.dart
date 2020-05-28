@@ -10,6 +10,7 @@ class VolLoc {
   String id;
   String contactEmail;
   String contactPhone;
+  String locString;
   @JsonKey(fromJson: _dateTimeFromTimestamp, toJson: _dateTimeAsIs)
   DateTime dateStart;
   @JsonKey(fromJson: _dateTimeFromTimestamp, toJson: _dateTimeAsIs)
@@ -19,6 +20,7 @@ class VolLoc {
   String desc;
   @JsonKey(fromJson: _fromJsonGeoPoint, toJson: _toJsonGeoPoint)
   GeoPoint location;
+
 
   static GeoPoint _fromJsonGeoPoint(GeoPoint geoPoint) {
     return geoPoint;
@@ -47,6 +49,7 @@ class VolLoc {
     this.dateEnd,
     this.dateCreated,
     this.desc,
+    this.locString,
   });
 
   factory VolLoc.fromJson(Map<String, dynamic> json) => _$VolLocFromJson(json);

@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
+import '../../services/user_repository.dart';
 
 class GetStartedPage extends StatefulWidget {
   @override
@@ -9,8 +12,10 @@ class GetStartedPage extends StatefulWidget {
 
 //TODO: Implement Facebook and Google Sign In
 class _GetStartedPageState extends State<GetStartedPage> {
+
   @override
   Widget build(BuildContext context) {
+    final userRepo = Provider.of<UserRepository>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('This is Us'),
@@ -76,18 +81,26 @@ class _GetStartedPageState extends State<GetStartedPage> {
             ),
             FractionallySizedBox(
               widthFactor: 0.9,
-              child: Card(
-                margin: EdgeInsets.all(10.0),
-                child: ListTile(
-                  leading: Icon(
-                    FontAwesomeIcons.google,
-                    color: Colors.teal,
-                  ),
-                  title: Text(
-                    'Continue with Google',
-                    style: TextStyle(
-                      color: Colors.teal.shade900,
-                      fontSize: 20.0,
+              child: GestureDetector(
+                onTap: (){
+                  userRepo.signInWithGoogle();
+                  userRepo.setInd();
+                  Navigator.of(context)
+                      .popUntil((route) => route.isFirst);
+                },
+                child: Card(
+                  margin: EdgeInsets.all(10.0),
+                  child: ListTile(
+                    leading: Icon(
+                      FontAwesomeIcons.google,
+                      color: Colors.teal,
+                    ),
+                    title: Text(
+                      'Continue with Google',
+                      style: TextStyle(
+                        color: Colors.teal.shade900,
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                 ),

@@ -19,7 +19,7 @@ class IndLocationCard extends StatefulWidget {
 }
 
 class _IndLocationCardState extends State<IndLocationCard> {
-  String orgName = 'Loading';
+  String orgName = '';
   void getOrgName() async {
     Firestore.instance
         .collection('Orgs')

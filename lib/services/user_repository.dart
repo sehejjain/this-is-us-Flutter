@@ -1,18 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thisisus/models/user_type_model.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserRepository with ChangeNotifier {
   FirebaseAuth _auth;
+  GoogleSignIn _googleSignIn;
   FirebaseUser _user;
   int _userType;
   Status _status = Status.Uninitialized;
 
+
   UserRepository.instance() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onAuthStateChanged);
+    _googleSignIn = _googleSignIn ?? GoogleSignIn();
   }
 
   Status get status => _status;
@@ -39,6 +43,28 @@ class UserRepository with ChangeNotifier {
       notifyListeners();
       return null;
     }
+  }
+  Future<AuthResult> signInWithGoogle() async {
+    _status = Status.Authenticating;
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+    await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    var x = await _auth.signInWithCredential(credential).then((onValue) {
+      try{
+      getUserType().then((onValue) {
+        print(_userType);
+      });}catch(e){
+        print(e);
+        print('User does not exist');
+      }
+    });
+    print(_auth.currentUser());
+    notifyListeners();
+    return x;
   }
 
   // ignore: missing_return
@@ -70,6 +96,7 @@ class UserRepository with ChangeNotifier {
     }
   }
 
+
   void setInd() async {
     if (_user != null) {
       _userType = 0;
@@ -93,6 +120,7 @@ class UserRepository with ChangeNotifier {
   }
 
   Future signOut() async {
+    _googleSignIn.signOut();
     _auth.signOut();
     _status = Status.Unauthenticated;
     _userType = -1;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:thisisus/constants.dart';
+import 'package:thisisus/constants/constants.dart';
 import 'package:thisisus/services/user_repository.dart';
 
 class EmailLoginScreen extends StatefulWidget {

@@ -45,7 +45,7 @@ class _IndHomeScreenState extends State<IndHomeScreen> {
               itemBuilder: (context, index) {
                 DocumentSnapshot ds = snapshot.data.documents[index];
                 var vol = VolLoc.fromJson(ds.data);
-
+                vol.id = ds.documentID;
                 return IndLocationCard(
                   loc: vol,
                   user: widget.user,
