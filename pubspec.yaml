@@ -13,7 +13,6 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   firebase_core: ^0.4.4+3
   firebase_auth: ^0.15.5+3
-  flutter_facebook_login: ^3.0.0
   cloud_firestore: ^0.13.4+2
   rounded_loading_button: ^1.0.0
   image_picker: ^0.6.5
