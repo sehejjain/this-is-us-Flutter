@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:thisisus/components/org_bottom_sheet.dart';
 import 'package:thisisus/models/LocationModel.dart';
@@ -34,8 +33,7 @@ class _OrgLocationCardState extends State<OrgLocationCard> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
+    super.initState();
     getOrgName();
   }
 

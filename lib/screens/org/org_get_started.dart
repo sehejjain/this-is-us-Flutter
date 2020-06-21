@@ -9,7 +9,7 @@ class OrgSignUpScreen extends StatefulWidget {
   _OrgSignUpScreenState createState() => _OrgSignUpScreenState();
 }
 
-//TODO: Implement Google and Facebook Sign In
+//TODO: Implement Facebook Sign In
 class _OrgSignUpScreenState extends State<OrgSignUpScreen> {
   @override
   Widget build(BuildContext context) {

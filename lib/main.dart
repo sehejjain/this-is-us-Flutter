@@ -10,8 +10,8 @@ import 'package:thisisus/screens/landing_screen.dart';
 import 'package:thisisus/screens/org/create_vol_loc.dart';
 import 'package:thisisus/screens/org/org_email_reg.dart';
 import 'package:thisisus/screens/org/org_get_started.dart';
-import 'package:thisisus/services/user_repository.dart';
 import 'package:thisisus/screens/splash_screen.dart';
+import 'package:thisisus/services/user_repository.dart';
 
 void main() async {
   return runApp(MyApp());

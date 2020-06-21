@@ -1,14 +1,9 @@
 import 'dart:ui';
-import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:thisisus/models/LocationModel.dart';
-import 'package:geocoder/geocoder.dart';
-
 
 class HomeVolLocBottomSheet extends StatefulWidget {
   final VolLoc loc;
@@ -28,7 +23,6 @@ class _HomeVolLocBottomSheetState extends State<HomeVolLocBottomSheet> {
       new RoundedLoadingButtonController();
   final RoundedLoadingButtonController _btnController2 =
       new RoundedLoadingButtonController();
-
 
   @override
   Widget build(BuildContext context) {
