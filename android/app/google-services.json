@@ -13,10 +13,19 @@
           "package_name": "com.sehej.thisisus"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "524359812404-2hle82l8ctsaon1g1fjocoho74s43bqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sehej.thisisus",
+            "certificate_hash": "476e01244559b95e26247078f7250f9e89083a2c"
+          }
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyACTHRrfRWr_Ik_VI2VORh7i5P7Hh-taPE"
+          "current_key": "AIzaSyCPSkwbSO8NUdtYm7H3xYKzGivb_ggqzho"
         }
       ],
       "services": {
