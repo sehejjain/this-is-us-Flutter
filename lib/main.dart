@@ -18,9 +18,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  //TODO: Create Org Login Landing Page or Org Home
-//TODO: Fix Landing Screen Problem
   final Widget home;
 
   MyApp({this.home});
@@ -39,7 +36,6 @@ class MyApp extends StatelessWidget {
           builder: (context, UserRepository user, _) {
             switch (user.status) {
               case Status.Uninitialized:
-                //TODO: Add Splash Screen Here
                 return SplashScreen();
               case Status.Unauthenticated:
                 return HomePage();
