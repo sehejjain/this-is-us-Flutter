@@ -29,6 +29,13 @@
             </array>
         </dict>
     </array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+            <true/>
+        <key>NSAllowsArbitraryLoadsInWebContent</key>
+            <true/>
+    </dict>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>This app needs access to location when open.</string>
     <key>NSLocationAlwaysUsageDescription</key>

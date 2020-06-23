@@ -17,7 +17,6 @@ class IndHomeScreen extends StatefulWidget {
 class _IndHomeScreenState extends State<IndHomeScreen> {
   @override
   Widget build(BuildContext context) {
-    //TODO: Implement Drawer
     return Scaffold(
       drawer: AppDrawer(
         loggedInUser: widget.user,

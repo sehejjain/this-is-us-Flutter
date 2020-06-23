@@ -10,7 +10,7 @@ class GetStartedPage extends StatefulWidget {
   _GetStartedPageState createState() => _GetStartedPageState();
 }
 
-//TODO: Implement Facebook and Google Sign In
+//TODO: Implement Facebook
 class _GetStartedPageState extends State<GetStartedPage> {
 
   @override

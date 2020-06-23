@@ -29,6 +29,7 @@ dependencies:
   shared_preferences: ^0.5.7
   provider: ^4.0.5
   loading_overlay: ^0.2.1
+  flutter_webview_plugin: ^0.3.11
 
 
 
