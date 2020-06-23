@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thisisus/models/user_type_model.dart';
+import 'package:thisisus/components/WebView/webview.dart';
+import 'package:flutter/material.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
@@ -12,7 +14,6 @@ class UserRepository with ChangeNotifier {
   FirebaseUser _user;
   int _userType;
   Status _status = Status.Uninitialized;
-
 
   UserRepository.instance() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onAuthStateChanged);
@@ -44,20 +45,22 @@ class UserRepository with ChangeNotifier {
       return null;
     }
   }
+
   Future<AuthResult> signInWithGoogle() async {
     _status = Status.Authenticating;
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
     var x = await _auth.signInWithCredential(credential).then((onValue) {
-      try{
-      getUserType().then((onValue) {
-        print(_userType);
-      });}catch(e){
+      try {
+        getUserType().then((onValue) {
+          print(_userType);
+        });
+      } catch (e) {
         print(e);
         print('User does not exist');
       }
@@ -96,14 +99,13 @@ class UserRepository with ChangeNotifier {
     }
   }
 
-
   void setInd() async {
     if (_user != null) {
       _userType = 0;
       UserType usertype = UserType(0);
       Map<String, dynamic> userTypeData = usertype.toJson();
       final CollectionReference userTypeRef =
-      Firestore.instance.collection('UserTypes');
+          Firestore.instance.collection('UserTypes');
       await userTypeRef.document(_user.uid).setData(userTypeData);
     }
   }
@@ -114,7 +116,7 @@ class UserRepository with ChangeNotifier {
       UserType usertype = UserType(1);
       Map<String, dynamic> userTypeData = usertype.toJson();
       final CollectionReference userTypeRef =
-      Firestore.instance.collection('UserTypes');
+          Firestore.instance.collection('UserTypes');
       await userTypeRef.document(_user.uid).setData(userTypeData);
     }
   }
@@ -138,5 +140,24 @@ class UserRepository with ChangeNotifier {
       _status = Status.Authenticated;
     }
     notifyListeners();
+  }
+
+  Future<AuthResult> loginWithFacebook(accessToken) async {
+// String result = await Navigator.push(
+//   context,
+//   MaterialPageRoute(
+//       builder: (context) => CustomWebView(
+//             selectedUrl:
+//                 'https://www.facebook.com/dialog/oauth?client_id=$your_client_id&redirect_uri=$your_redirect_url&response_type=token&scope=email,public_profile,',
+//           ),
+//       maintainState: true),);
+    if (accessToken != null) {
+      try {
+        final facebookAuthCred =
+            FacebookAuthProvider.getCredential(accessToken: accessToken);
+        return await _auth.signInWithCredential(facebookAuthCred);
+      } catch (e) {}
+    } else
+      return null;
   }
 }
