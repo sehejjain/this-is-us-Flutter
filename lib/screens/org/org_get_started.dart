@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:thisisus/components/WebView/webview.dart';
 
 import '../../services/user_repository.dart';
 
@@ -80,11 +81,10 @@ class _OrgSignUpScreenState extends State<OrgSignUpScreen> {
             FractionallySizedBox(
               widthFactor: 0.9,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   userRepo.signInWithGoogle();
                   userRepo.setOrg();
-                  Navigator.of(context)
-                      .popUntil((route) => route.isFirst);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 },
                 child: Card(
                   margin: EdgeInsets.all(10.0),

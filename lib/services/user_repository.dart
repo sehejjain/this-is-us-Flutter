@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thisisus/models/user_type_model.dart';
-import 'package:thisisus/components/WebView/webview.dart';
 import 'package:flutter/material.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
@@ -142,22 +141,5 @@ class UserRepository with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<AuthResult> loginWithFacebook(accessToken) async {
-// String result = await Navigator.push(
-//   context,
-//   MaterialPageRoute(
-//       builder: (context) => CustomWebView(
-//             selectedUrl:
-//                 'https://www.facebook.com/dialog/oauth?client_id=$your_client_id&redirect_uri=$your_redirect_url&response_type=token&scope=email,public_profile,',
-//           ),
-//       maintainState: true),);
-    if (accessToken != null) {
-      try {
-        final facebookAuthCred =
-            FacebookAuthProvider.getCredential(accessToken: accessToken);
-        return await _auth.signInWithCredential(facebookAuthCred);
-      } catch (e) {}
-    } else
-      return null;
-  }
+  
 }
